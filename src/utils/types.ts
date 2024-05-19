@@ -23,6 +23,13 @@ export interface IUser {
   deletedAt?: Date | null;
 }
 
+export interface UserInfo {
+  _id: string;
+  userName: string;
+  email: string;
+  password?: string; // <-- Make password optional
+}
+
 export interface IVehicle {
     name: string;
     model: string;
