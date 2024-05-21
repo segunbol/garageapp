@@ -8,26 +8,18 @@ import {
   userSignInSchema,
 } from "../validators/userValidator";
 import jwt from "jsonwebtoken";
-import { UserInfo } from "../utils/types";
+import { CreateUserData, UserInfo } from "../types";
 
 export const signUp = async (req: Request, res: Response) => {
-  // console.log(req.body)
   try {
-    const { error, value } = userSignUpSchema.body.validate(req.body);
-    console.log(value);
-    if (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.details[0].message,
-      });
-    }
+    const payload = <CreateUserData>req.body;
+    
     const {
       userName,
       firstName,
       lastName,
       phoneNo,
       email,
-      userImg,
       password,
       verified,
       gender,
@@ -36,7 +28,7 @@ export const signUp = async (req: Request, res: Response) => {
       city,
       address,
       vehicles
-      } = value;
+      } = payload;
 
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hashSync(password, salt);
@@ -46,7 +38,6 @@ export const signUp = async (req: Request, res: Response) => {
       lastName,
       phoneNo,
       email,
-      userImg,
       password: hashedPassword,
       verified,
       gender,
@@ -74,13 +65,8 @@ export const signIn = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { error, value } = userSignInSchema.body.validate(req.body);
-    if (error) {
-      return res.status(400).json({
-        success: false,
-        message: error.details[0].message,
-      });
-    }
+    const { value } = req.body;
+    
     const { userName, password } = value;
     const user = await Users.findOne({ userName: userName });
     if (!user) {
@@ -102,13 +88,6 @@ export const signIn = async (
 
     return res.cookie("token", token).status(200).json({info, token: token});
 
-    // Do something with the validated user data
-
-    // Return  a success response
-    // return res.status(200).json({
-    //   success: true,
-    //   message: "Sign in successful",
-    // });
   } catch (err: any) {
     return res.status(500).json({
       success: false,

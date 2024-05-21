@@ -23,40 +23,13 @@ export const userSignUpSchema = {
       .trim()
       .message('number should be in the "+2348012345678" format'),
     email: Joi.string().email().required().trim(),
-    age:Joi.number().allow("", null),
-    bmi:Joi.number().allow("", null),
-    image: Joi.string().allow("", null),
-    images: Joi.string().allow("", null),
     password: Joi.string(),
     gender: Joi.string().required().trim().valid("Male", "Female"),
     isAdmin: Joi.boolean().allow("", null),
     verified: Joi.boolean().allow("", null),
     state: Joi.string().allow("", null),
     city: Joi.string().allow("", null),
-    currentWeight: Joi.number().optional(),
-    targetWeight: Joi.number().optional(),
-    focusArea: Joi.string().allow("", null).valid(
-      "back",
-      "cardio",
-      "chest",
-      "lower arms",
-      "lower legs",
-      "neck",
-      "shoulders",
-      "upper arms",
-      "upper legs",
-      "waist",
-      "full body"
-    ),
-    goals: Joi.string().allow("", null).valid("Keep fit", "Muscle gain", "Weight loss"),
-    level: Joi.string().allow("", null).valid("beginner", "intermediate", "expert"),
-    difficulty: Joi.string().allow("", null).valid("easy", "medium", "hard"),
-    gymSubscribed: Joi.array().items(
-      Joi.object({
-        gymId: Joi.string().allow("", null),
-        name: Joi.string().allow("", null),
-      })
-    ).allow(null),
+    
   })
 };
 
@@ -94,37 +67,11 @@ export const editUserSchema = {
       .trim()
       .message('number should be in the "+2348012345678" format'),
     email: Joi.string().email().allow("", null).trim(),
-    age:Joi.number().allow("", null),
-    bmi:Joi.number().allow("", null),
-    image: Joi.string().allow("", null),
-    images: Joi.string().allow("", null),
     password: Joi.string().allow("", null),
     gender: Joi.string().allow("", null).trim().valid("Male", "Female"),
     state: Joi.string().allow("", null),
     city: Joi.string().allow("", null),
-    currentWeight: Joi.number().optional(),
-    targetWeight: Joi.number().optional(),
-    focusArea: Joi.string().allow("", null).valid(
-      "back",
-      "cardio",
-      "chest",
-      "lower arms",
-      "lower legs",
-      "neck",
-      "shoulders",
-      "upper arms",
-      "upper legs",
-      "waist"
-    ),
-    goals: Joi.string().allow("", null).valid("Keep fit", "Muscle gain", "Weight loss"),
-    level: Joi.string().allow("", null).valid("beginner", "intermediate", "expert"),
-    difficulty: Joi.string().allow("", null).valid("easy", "medium", "hard"),
-    gymSubscribed: Joi.array().items(
-      Joi.object({
-        gymId: Joi.string().allow("", null),
-        name: Joi.string().allow("", null),
-      })
-    ).allow(null), 
+   
   }),
 };
 

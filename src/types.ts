@@ -9,8 +9,7 @@ export interface IUser {
   firstName: string;
   lastName: string;
   gender: string;
-  vehicles:  { vehicleId: ObjectId; vehicleName: string }[];
-  image: string;
+  vehicles:  ObjectId[];
   password: string;
   email: string;
   phoneNo: string;
@@ -22,6 +21,8 @@ export interface IUser {
   createdAt: Date | null;
   deletedAt?: Date | null;
 }
+
+export type CreateUserData = Omit<IUser, ''>
 
 export interface UserInfo {
   _id: string;
@@ -36,9 +37,8 @@ export interface IVehicle {
     productionYear: string;
     engineNumber: string;
     chasisNumber: string;
-    vehicleType:  string;
+    vehicleType:  ObjectId;
     userOwner :ObjectId;
-    image: string;
     color: string;
     createdAt: Date | null;
     deletedAt?: Date | null;
@@ -62,5 +62,12 @@ export interface IVehicle {
     deletedAt?: Date | null;
   }
 
+  export interface IVehicleTypes {
+    name: string;
+    image: string;
+    numberOfWheels: number;
+    createdAt?: Date | null;
+    deletedAt?: Date | null;
+  }
 
   

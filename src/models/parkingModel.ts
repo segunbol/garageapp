@@ -1,5 +1,5 @@
 import { Schema, PaginateModel, model } from "mongoose";
-import { IParking } from "../utils/types";
+import { IParking } from "../types";
 import paginate from "mongoose-paginate-v2";
 
 const parkingSchema = new Schema<IParking>(

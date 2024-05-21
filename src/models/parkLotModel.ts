@@ -4,7 +4,7 @@
 //     wing: string;
 
 import { Schema, PaginateModel, model } from "mongoose";
-import { IParkLot,} from "../utils/types";
+import { IParkLot,} from "../types";
 import paginate from "mongoose-paginate-v2";
 
 const parkLotSchema = new Schema<IParkLot>(

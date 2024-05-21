@@ -1,5 +1,5 @@
 import { Schema, PaginateModel, model } from "mongoose";
-import { IUser } from "../utils/types";
+import { IUser } from "../types";
 import paginate from "mongoose-paginate-v2";
 
 const urserSchema = new Schema<IUser>(
@@ -12,8 +12,7 @@ const urserSchema = new Schema<IUser>(
       enum: ["Male", "Female", "Neither"],
       required: true,
     },
-    vehicles: [{_id: false, vehicleId: { type: Schema.Types.ObjectId, ref: "Vehicles", required: false },name: { type: String, required: false }}],
-    image: { type: String, required: false },
+    vehicles: [{ type: Schema.Types.ObjectId, ref: "Vehicles", required: false }],
     password: { type: String, required: true },
     isAdmin: { type: Boolean, default: false, required: false },
     verified: { type: Boolean, default: false, required: false },

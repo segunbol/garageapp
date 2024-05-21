@@ -1,5 +1,5 @@
 import { Schema, PaginateModel, model } from "mongoose";
-import {  IVehicle } from "../utils/types";
+import {  IVehicle } from "../types";
 import paginate from "mongoose-paginate-v2";
 
 const vehicleSchema = new Schema<IVehicle>(
@@ -12,10 +12,9 @@ const vehicleSchema = new Schema<IVehicle>(
       required: true,
     },
     engineNumber: { type: String, required: true },
-    image: { type: String, required: false },
     chasisNumber: { type: String, required: true },
     color:{ type: String, required: true },
-    vehicleType: { type: String, required: true }
+    vehicleType: { type: Schema.Types.ObjectId, ref: "VehicleTypes", required: true }
   },
   {
     timestamps: true,
