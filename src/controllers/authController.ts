@@ -1,14 +1,10 @@
-import mongoose from "mongoose";
+
 import { Request, Response } from "express";
 import Users from "../models/userModel";
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
-import {
-  userSignUpSchema,
-  userSignInSchema,
-} from "../validators/userValidator";
 import jwt from "jsonwebtoken";
-import { CreateUserData, UserInfo } from "../types";
+import { CreateUserData, SignInUserData, UserInfo } from "../types";
 
 export const signUp = async (req: Request, res: Response) => {
   try {
@@ -65,9 +61,9 @@ export const signIn = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const { value } = req.body;
+    const payload = <SignInUserData>req.body;
     
-    const { userName, password } = value;
+    const { userName, password } = payload;
     const user = await Users.findOne({ userName: userName });
     if (!user) {
       return res.status(404).json("User not found!");
@@ -82,7 +78,7 @@ export const signIn = async (
       SECRET,
       { expiresIn: "1d" }
     );
-    const info: UserInfo = user.toObject(); // Assign to the optional type
+    const info: UserInfo = user.toObject();
     delete info.password;
     
 
@@ -102,7 +98,6 @@ export const signOut = async (
 ): Promise<Response> => {
   try {
     delete req.user;
-    console.log(req.headers.user);
     return res
       .clearCookie("token", { sameSite: "none", secure: true })
       .status(200)

@@ -23,6 +23,7 @@ export interface IUser {
 }
 
 export type CreateUserData = Omit<IUser, ''>
+export type UpdateUserData = Omit<IUser, ''>
 
 export interface UserInfo {
   _id: string;
@@ -30,6 +31,24 @@ export interface UserInfo {
   email: string;
   password?: string; // <-- Make password optional
 }
+
+export interface IUserSignIn {
+  userName: string;
+  password: string;
+}
+
+export type SignInUserData = Omit<IUserSignIn, ''>
+
+export type PaginationQueryType = {
+  search?: string;
+  sort?: string;
+  page?: number;
+  limit?: number;
+  all?: boolean;
+  start?: string;
+  end?: string;
+  status?: boolean;
+};
 
 export interface IVehicle {
     name: string;
