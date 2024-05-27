@@ -1,15 +1,16 @@
 import { Schema, PaginateModel, model } from "mongoose";
-import { IUser } from "../types";
+import { IUser, GenderEnum } from "../types";
 import paginate from "mongoose-paginate-v2";
 
-const urserSchema = new Schema<IUser>(
+
+const userSchema = new Schema<IUser>(
   {
     userName: { type: String, required: true, unique: true },
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Neither"],
+      enum: Object.values(GenderEnum),
       required: true,
     },
     vehicles: [{ type: Schema.Types.ObjectId, ref: "Vehicles", required: false }],
@@ -40,7 +41,14 @@ const urserSchema = new Schema<IUser>(
   }
 );
 
-urserSchema.plugin(paginate);
-const Users = model<IUser, PaginateModel<IUser>>("Users", urserSchema);
+userSchema.plugin(paginate);
+const Users = model<IUser, PaginateModel<IUser>>("Users", userSchema);
+
+userSchema.set('toJSON', {
+  transform: function (doc, ret, options) {
+    delete ret.password;
+    return ret;
+  }
+});
 
 export default Users;

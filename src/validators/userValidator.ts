@@ -1,4 +1,5 @@
 import { Joi } from "./joi";
+import { GenderEnum } from "../types";
 
 export const userSignUpSchema = {
   body: Joi.object({
@@ -24,11 +25,13 @@ export const userSignUpSchema = {
       .message('number should be in the "+2348012345678" format'),
     email: Joi.string().email().required().trim(),
     password: Joi.string(),
-    gender: Joi.string().required().trim().valid("Male", "Female"),
+    gender: Joi.string().required().trim().valid(...Object.values(GenderEnum)),
     isAdmin: Joi.boolean().allow("", null),
     verified: Joi.boolean().allow("", null),
     state: Joi.string().allow("", null),
     city: Joi.string().allow("", null),
+    address: Joi.string().allow("", null),
+    vehicles: Joi.string().allow("", null)
     
   })
 };
@@ -68,7 +71,7 @@ export const editUserSchema = {
       .message('number should be in the "+2348012345678" format'),
     email: Joi.string().email().allow("", null).trim(),
     password: Joi.string().allow("", null),
-    gender: Joi.string().allow("", null).trim().valid("Male", "Female"),
+    gender: Joi.string().allow("", null).trim().valid(...Object.values(GenderEnum)),
     state: Joi.string().allow("", null),
     city: Joi.string().allow("", null),
    
