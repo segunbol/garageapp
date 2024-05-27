@@ -61,9 +61,7 @@ export const signIn = async (
   res: Response
 ): Promise<Response> => {
   try {
-    const payload = <SignInUserData>req.body;
-    
-    const { userName, password } = payload;
+    const { userName, password } = <SignInUserData>req.body;
     const user = await Users.findOne({ userName: userName });
     if (!user) {
       return res.status(404).json("User not found!");
@@ -78,11 +76,8 @@ export const signIn = async (
       SECRET,
       { expiresIn: "1d" }
     );
-    const info: UserInfo = user.toObject();
-    delete info.password;
-    
 
-    return res.cookie("token", token).status(200).json({info, token: token});
+    return res.cookie("token", token).status(200).json({user, token: token});
 
   } catch (err: any) {
     return res.status(500).json({

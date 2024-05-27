@@ -8,7 +8,7 @@ import { getAllUsers, getUser, updateUser } from "../controllers/userController"
 const router = express.Router();
 
 router.get("/", authenticate, getAllUsers );
-router.patch("/:id", authenticate, validate(editUserSchema),  updateUser );
+router.patch("/:id", validate(editUserSchema), authenticate,  updateUser );
 router.get("/:id",  authenticate, getUser );
 
 export default router;
