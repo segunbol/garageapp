@@ -24,11 +24,13 @@ export const userSignUpSchema = {
       .message('number should be in the "+2348012345678" format'),
     email: Joi.string().email().required().trim(),
     password: Joi.string(),
-    gender: Joi.string().required().trim().valid("Male", "Female"),
+    gender: Joi.string().required().trim().valid("male", "female"),
     isAdmin: Joi.boolean().allow("", null),
     verified: Joi.boolean().allow("", null),
     state: Joi.string().allow("", null),
     city: Joi.string().allow("", null),
+    address: Joi.string().allow("", null),
+    vehicles: Joi.string().allow("", null)
     
   })
 };

@@ -9,7 +9,7 @@ const urserSchema = new Schema<IUser>(
     lastName: { type: String, required: true },
     gender: {
       type: String,
-      enum: ["Male", "Female", "Neither"],
+      enum: ["male", "female", "neither"],
       required: true,
     },
     vehicles: [{ type: Schema.Types.ObjectId, ref: "Vehicles", required: false }],
