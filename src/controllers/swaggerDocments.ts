@@ -29,6 +29,10 @@ const options = {
             "phoneNo",
           ],
           properties: {
+            _id: {
+              type: 'string',
+              description: 'User ID',
+            },
             userName: {
               type: "string",
               description: "An alias or nickname of the user. Has to be unique",
@@ -102,10 +106,10 @@ const options = {
         },
       },
       securitySchemes: {
-        ApiKeyAuth: {
-          type: "apiKey",
-          in: "header",
+        bearerAuth: {
+          type: "apiKey", 
           name: "Authorization",
+          in: "header",
         },
       },
     },

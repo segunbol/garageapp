@@ -6,12 +6,30 @@ import { getAllUsers, getUser, updateUser } from "../controllers/userController"
 
 const router = express.Router();
 
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   responses:
+ *     400:
+ *       description: Bad Request
+ *     401:
+ *       description: Unauthorized
+ */
+
+
 /** 
  * @swagger
  *   /users:
  *     get:
  *       summary: Get All Users
  *       tags: [Users]
+ *       security:
+ *         - bearerAuth: []
  *       responses:
  *         "200":
  *           description: Returns All Users
@@ -26,12 +44,36 @@ const router = express.Router();
  */
 router.get("/", authenticate, getAllUsers );
 
+/**
+ * @swagger
+ * components:
+ *   securitySchemes:
+ *     bearerAuth:
+ *       type: http
+ *       scheme: bearer
+ *       bearerFormat: JWT
+ *   responses:
+ *     400:
+ *       description: Bad Request
+ *     401:
+ *       description: Unauthorized
+ */
+
 /** 
  * @swagger
- *   /users/:id:
+ *   /users/665321bc88c0458e42071840:
  *     get:
  *       summary: Get All Users
  *       tags: [Users]
+ *       security:
+ *         - bearerAuth: []
+ *       parameters:
+ *         - in: path
+ *           name: userid
+ *           required: true
+ *           schema:
+ *             type: string
+ *           description: The user ID
  *       responses:
  *         "200":
  *           description: Returns All Users
