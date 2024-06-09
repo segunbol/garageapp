@@ -9,6 +9,7 @@ import authRoutes from "./routes/authRoutes";
 import userRoutes from "./routes/userRoutes";
 import swaggerUi from 'swagger-ui-express';
 import { swaggerDoc } from './controllers/swaggerDocumentation'
+import { Doc } from "./controllers/swaggerDocments";
 // import swaggerDocument from './swagger.json';
 
 
@@ -47,7 +48,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // const API_URL = process.env.API_URL!; 
 
-app.use(`/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerDoc));
+app.use(`/api-docs`, swaggerUi.serve, swaggerUi.setup(Doc));
 app.use(`/auth`, authRoutes );
 app.use(`/users`, userRoutes );
 

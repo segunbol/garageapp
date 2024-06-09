@@ -11,6 +11,7 @@ const swaggerOptions = {
           name: 'ExtraMortal',
         },
         servers: ["http://localhost:3000"],
+        
       },
       schemes: ['http', 'https']
     },
