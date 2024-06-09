@@ -4,11 +4,17 @@ export interface Info {
   [key: string]: string | boolean | ObjectId | undefined;
 }
 
+export enum GenderEnum {
+  MALE = 'male',
+  FEMALE = 'female',
+  NEITHER = 'neither'
+}
+
 export interface IUser {
   userName: string;
   firstName: string;
   lastName: string;
-  gender: string;
+  gender: GenderEnum;
   vehicles:  ObjectId[];
   password: string;
   email: string;
