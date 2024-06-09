@@ -8,7 +8,7 @@ const router = express.Router();
 
 /** 
  * @swagger
- *   /:
+ *   /users:
  *     get:
  *       summary: Get All Users
  *       tags: [Users]
@@ -25,6 +25,25 @@ const router = express.Router();
  *           $ref: '#/components/responses/401'
  */
 router.get("/", authenticate, getAllUsers );
+
+/** 
+ * @swagger
+ *   /users/:id:
+ *     get:
+ *       summary: Get All Users
+ *       tags: [Users]
+ *       responses:
+ *         "200":
+ *           description: Returns All Users
+ *           contents:
+ *             application/json:
+ *               schema:
+ *                 $ref: '#/components/schemas/User'
+ *         "400":
+ *           $ref: '#/components/responses/400'
+ *         "401":
+ *           $ref: '#/components/responses/401'
+ */
 router.patch("/:id", authenticate, validate(editUserSchema),  updateUser );
 router.get("/:id",  authenticate, getUser );
 

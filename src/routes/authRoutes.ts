@@ -8,7 +8,7 @@ const router = express.Router();
 
 /** 
  * @swagger
- *   /signup:
+ *   /auth/signup:
  *     post:
  *       summary: SignUp User
  *       tags: [Users]
@@ -28,7 +28,7 @@ router.post("/signup", validate(userSignUpSchema), signUp);
 
 /** 
  * @swagger
- *   /signin:
+ *   /auth/signin:
  *     post:
  *       summary: Sign In User 
  *       tags: [Users]
